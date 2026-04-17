@@ -572,7 +572,7 @@
   <div class="tip-box">
     <div class="tip-head">HOW TO READ A QUESTION</div>
     Step 1: Draw the 2×2 mentally.<br>
-    Step 2: Fill in <strong>a, b, c, d</strong> from the stem or table.<br>
+    Step 2: Fill in <strong style="color:var(--accent)">a</strong>, <strong style="color:var(--accent2)">b</strong>, <strong style="color:var(--accent3)">c</strong>, <strong style="color:var(--warn)">d</strong> from the stem or table.<br>
     Step 3: Ask — "what are they actually asking for?" and apply one formula.
   </div>
 
@@ -592,19 +592,19 @@
   <div class="formula-grid">
     <div class="formula-card">
       <div class="formula-name">Absolute Risk (AR)</div>
-      <div class="formula-eq"><span>a / (a+b)</span></div>
+      <div class="formula-eq"><span style="color:var(--accent)">a</span> / (<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</div>
       <div class="formula-tip">
         "What fraction of exposed people got sick?"<br>
         Also called <strong>incidence</strong> or <strong>attack rate</strong>.<br>
-        Unexposed AR = c/(c+d)
+        Unexposed AR = <span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)
       </div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name">Relative Risk (RR)</div>
-      <div class="formula-eq"><span>AR<sub>exposed</sub> / AR<sub>control</sub></span></div>
+      <div class="formula-eq"><span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>) ÷ <span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)</div>
       <div class="formula-tip">
-        = [a/(a+b)] / [c/(c+d)]<br>
+        = [<span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)] / [<span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)]<br>
         <strong>RR = 1</strong>: no difference<br>
         <strong>RR &gt; 1</strong>: exposure increases risk<br>
         <strong>RR &lt; 1</strong>: exposure is protective<br>
@@ -614,7 +614,7 @@
 
     <div class="formula-card">
       <div class="formula-name">Odds Ratio (OR)</div>
-      <div class="formula-eq"><span>(a×d) / (b×c)</span></div>
+      <div class="formula-eq">(<span style="color:var(--accent)">a</span>×<span style="color:var(--warn)">d</span>) / (<span style="color:var(--accent2)">b</span>×<span style="color:var(--accent3)">c</span>)</div>
       <div class="formula-tip">
         "Diagonal cross multiply."<br>
         Use for <strong>case-control studies</strong>.<br>
@@ -625,9 +625,9 @@
 
     <div class="formula-card">
       <div class="formula-name">Absolute Risk Reduction (ARR)</div>
-      <div class="formula-eq"><span>AR<sub>control</sub> − AR<sub>treated</sub></span></div>
+      <div class="formula-eq"><span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>) − <span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</div>
       <div class="formula-tip">
-        = [c/(c+d)] − [a/(a+b)]<br>
+        = [<span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)] − [<span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)]<br>
         Always <strong>control minus treatment</strong>.<br>
         <strong>This is the most clinically meaningful number.</strong><br>
         How much did treatment actually reduce risk?
@@ -786,7 +786,7 @@
   <div class="formula-grid">
     <div class="formula-card">
       <div class="formula-name">Sensitivity (SnNout)</div>
-      <div class="formula-eq"><span>a / (a+c)</span></div>
+      <div class="formula-eq"><span style="color:var(--accent)">a</span> / (<span style="color:var(--accent)">a</span>+<span style="color:var(--accent3)">c</span>)</div>
       <div class="formula-tip">
         TP / all who have disease.<br>
         "How good is this test at finding disease?"<br>
@@ -797,7 +797,7 @@
 
     <div class="formula-card">
       <div class="formula-name">Specificity (SpPin)</div>
-      <div class="formula-eq"><span>d / (b+d)</span></div>
+      <div class="formula-eq"><span style="color:var(--warn)">d</span> / (<span style="color:var(--accent2)">b</span>+<span style="color:var(--warn)">d</span>)</div>
       <div class="formula-tip">
         TN / all who don't have disease.<br>
         "How good is this test at correctly labeling healthy people?"<br>
@@ -808,7 +808,7 @@
 
     <div class="formula-card">
       <div class="formula-name">PPV</div>
-      <div class="formula-eq"><span>a / (a+b)</span></div>
+      <div class="formula-eq"><span style="color:var(--accent)">a</span> / (<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</div>
       <div class="formula-tip">
         "If the test is positive, what's the chance the patient actually has it?"<br>
         <strong>PPV depends heavily on prevalence.</strong><br>
@@ -818,7 +818,7 @@
 
     <div class="formula-card">
       <div class="formula-name">NPV</div>
-      <div class="formula-eq"><span>d / (c+d)</span></div>
+      <div class="formula-eq"><span style="color:var(--warn)">d</span> / (<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)</div>
       <div class="formula-tip">
         "If the test is negative, what's the chance they truly don't have it?"<br>
         <strong>NPV also depends on prevalence.</strong><br>
