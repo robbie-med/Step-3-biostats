@@ -22,7 +22,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -49,7 +49,7 @@
   nav {
     display: flex;
     gap: 4px;
-    padding: 12px 16px;
+    padding: 10px 16px;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
     flex-wrap: wrap;
@@ -62,7 +62,7 @@
     background: none;
     border: 1px solid var(--border);
     color: var(--muted);
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
     font-family: 'JetBrains Mono', monospace;
@@ -105,7 +105,6 @@
   .grid-2x2 {
     display: grid;
     grid-template-columns: 120px 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
     gap: 2px;
     margin: 20px 0;
     background: var(--border);
@@ -132,13 +131,7 @@
   .cell.c { border: 2px solid var(--accent3); }
   .cell.d { border: 2px solid var(--warn); }
   .cell.total { background: #0d1117; font-weight: 600; color: var(--muted); font-size: 12px; }
-
-  .cell-letter {
-    font-size: 22px;
-    font-weight: 800;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
+  .cell-letter { font-size: 22px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
   .cell-desc { font-size: 10px; color: var(--muted); margin-top: 2px; }
   .cell.a .cell-letter { color: var(--accent); }
   .cell.b .cell-letter { color: var(--accent2); }
@@ -148,7 +141,7 @@
   /* FORMULA CARDS */
   .formula-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 12px;
     margin: 16px 0;
   }
@@ -162,6 +155,8 @@
   }
 
   .formula-card:hover { border-color: var(--accent); }
+
+  .formula-emoji { font-size: 26px; line-height: 1; margin-bottom: 6px; }
 
   .formula-name {
     font-size: 11px;
@@ -190,6 +185,16 @@
 
   .formula-tip strong { color: var(--warn); }
 
+  .formula-killer {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--accent2);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
   /* CALCULATOR */
   .calc-container {
     background: var(--surface);
@@ -198,6 +203,15 @@
     padding: 20px;
     margin: 16px 0;
   }
+
+  .calc-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  @media (max-width: 640px) { .calc-layout { grid-template-columns: 1fr; } }
 
   .input-grid {
     display: grid;
@@ -214,11 +228,7 @@
     margin-bottom: 4px;
   }
 
-  .input-group label span {
-    font-weight: 700;
-    font-size: 13px;
-  }
-
+  .input-group label span { font-weight: 700; font-size: 13px; }
   .input-group.a label span { color: var(--accent); }
   .input-group.b label span { color: var(--accent2); }
   .input-group.c label span { color: var(--accent3); }
@@ -239,25 +249,89 @@
 
   input[type=number]:focus { border-color: var(--accent); }
 
-  .calc-btn {
-    background: var(--accent);
-    color: #000;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 4px;
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+  input[type=range] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    outline: none;
+    margin-top: 7px;
     cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: opacity 0.15s;
   }
 
-  .calc-btn:hover { opacity: 0.85; }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+  .input-group.a input[type=range] { background: linear-gradient(to right, var(--accent) 0%, var(--border) 0%); }
+  .input-group.a input[type=range]::-webkit-slider-thumb { background: var(--accent); }
+  .input-group.b input[type=range] { background: linear-gradient(to right, var(--accent2) 0%, var(--border) 0%); }
+  .input-group.b input[type=range]::-webkit-slider-thumb { background: var(--accent2); }
+  .input-group.c input[type=range] { background: linear-gradient(to right, var(--accent3) 0%, var(--border) 0%); }
+  .input-group.c input[type=range]::-webkit-slider-thumb { background: var(--accent3); }
+  .input-group.d input[type=range] { background: linear-gradient(to right, var(--warn) 0%, var(--border) 0%); }
+  .input-group.d input[type=range]::-webkit-slider-thumb { background: var(--warn); }
+
+  /* MINI 2x2 */
+  .mini-2x2 {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .m2-cell {
+    background: var(--surface);
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .m2-cell.header { background: #161b24; color: var(--muted); font-size: 10px; }
+  .m2-cell.label { background: #161b24; color: var(--muted); font-size: 10px; }
+  .m2-cell.a { color: var(--accent); border: 1px solid var(--accent); }
+  .m2-cell.b { color: var(--accent2); border: 1px solid var(--accent2); }
+  .m2-cell.c { color: var(--accent3); border: 1px solid var(--accent3); }
+  .m2-cell.d { color: var(--warn); border: 1px solid var(--warn); }
+  .m2-cell.total { background: #0d1117; color: var(--muted); font-size: 11px; }
+
+  /* ROC CANVAS */
+  .roc-wrap {
+    margin-top: 12px;
+  }
+
+  .roc-label {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  #roc-canvas {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 6px;
+  }
 
   .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
     gap: 8px;
     margin-top: 16px;
   }
@@ -286,14 +360,6 @@
 
   .result-note { font-size: 10px; color: var(--muted); margin-top: 2px; }
 
-  /* DIAGNOSTIC SECTION */
-  .dx-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px;
-    margin: 16px 0;
-  }
-
   /* PRACTICE Q */
   .question-card {
     background: var(--surface);
@@ -312,11 +378,7 @@
     margin-bottom: 8px;
   }
 
-  .q-stem {
-    line-height: 1.7;
-    margin-bottom: 14px;
-    font-size: 14px;
-  }
+  .q-stem { line-height: 1.7; margin-bottom: 14px; font-size: 14px; }
 
   .q-table {
     width: 100%;
@@ -342,12 +404,7 @@
     background: var(--bg);
   }
 
-  .q-ask {
-    font-weight: 700;
-    color: var(--warn);
-    margin-bottom: 14px;
-    font-size: 14px;
-  }
+  .q-ask { font-weight: 700; color: var(--warn); margin-bottom: 14px; font-size: 14px; }
 
   .choices { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
 
@@ -365,6 +422,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    width: 100%;
   }
 
   .choice-btn:hover:not(:disabled) { border-color: var(--accent3); color: var(--accent3); }
@@ -422,9 +480,10 @@
   }
 
   .cheat-row:last-child { border-bottom: none; }
-  .cheat-key { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--warn); min-width: 70px; }
-  .cheat-val { font-family: 'JetBrains Mono', monospace; color: var(--accent); flex: 1; min-width: 120px; }
-  .cheat-note { color: var(--muted); font-size: 11px; }
+  .cheat-key { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--warn); min-width: 90px; }
+  .cheat-val { font-family: 'JetBrains Mono', monospace; color: var(--accent); flex: 1; min-width: 130px; }
+  .cheat-note { color: var(--muted); font-size: 11px; min-width: 120px; }
+  .cheat-killer { font-size: 10px; color: var(--accent2); flex-basis: 100%; padding-top: 2px; font-style: italic; }
 
   /* BADGES */
   .badge {
@@ -437,6 +496,7 @@
     letter-spacing: 0.05em;
     margin-right: 4px;
   }
+
   .badge.rct { background: rgba(79,156,249,0.15); color: var(--accent3); }
   .badge.obs { background: rgba(245,166,35,0.15); color: var(--warn); }
   .badge.dx { background: rgba(0,212,170,0.15); color: var(--accent); }
@@ -450,6 +510,7 @@
     font-size: 13px;
     line-height: 1.6;
   }
+
   .tip-box .tip-head {
     font-size: 10px;
     font-family: 'JetBrains Mono', monospace;
@@ -468,6 +529,7 @@
     font-size: 13px;
     line-height: 1.6;
   }
+
   .warn-box .warn-head {
     font-size: 10px;
     font-family: 'JetBrains Mono', monospace;
@@ -488,18 +550,14 @@
     align-items: center;
     flex-wrap: wrap;
   }
+
   .score-item { text-align: center; }
   .score-num { font-size: 24px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
   .score-lbl { font-size: 10px; color: var(--muted); }
   .score-num.correct-c { color: var(--correct); }
   .score-num.wrong-c { color: var(--wrong); }
 
-  .progress-dots {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-left: auto;
-  }
+  .progress-dots { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
 
   .dot {
     width: 10px;
@@ -507,8 +565,205 @@
     border-radius: 50%;
     background: var(--border);
   }
+
   .dot.done-correct { background: var(--correct); }
   .dot.done-wrong { background: var(--wrong); }
+
+  .reset-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    transition: all 0.15s;
+    margin-left: auto;
+  }
+
+  .reset-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+
+  /* FLASH CARDS */
+  .fc-progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .fc-progress-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .fc-controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  .fc-hint {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .fc-perspective {
+    perspective: 1200px;
+    margin-bottom: 16px;
+  }
+
+  .fc-card {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    transform-style: preserve-3d;
+    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+  }
+
+  .fc-card.flipped { transform: rotateY(180deg); }
+
+  .fc-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .fc-front {
+    background: var(--surface);
+  }
+
+  .fc-back {
+    background: #0d1117;
+    transform: rotateY(180deg);
+    border-color: var(--accent);
+    justify-content: flex-start;
+    padding-top: 24px;
+  }
+
+  .fc-big-emoji { font-size: 52px; line-height: 1; margin-bottom: 12px; }
+
+  .fc-front-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .fc-front-hint {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .fc-back-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .fc-back-meaning {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .fc-back-killer {
+    font-size: 11px;
+    color: var(--accent2);
+    font-style: italic;
+    line-height: 1.5;
+    padding: 8px 12px;
+    background: rgba(255,107,53,0.06);
+    border: 1px solid rgba(255,107,53,0.2);
+    border-radius: 6px;
+    text-align: center;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .fc-back-mnemonic {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .fc-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .fc-btn {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    transition: opacity 0.15s;
+  }
+
+  .fc-btn:hover { opacity: 0.85; }
+  .fc-btn.again { background: rgba(239,68,68,0.15); color: var(--wrong); border: 1px solid var(--wrong); }
+  .fc-btn.got-it { background: rgba(34,197,94,0.15); color: var(--correct); border: 1px solid var(--correct); }
+  .fc-btn.shuffle { background: none; border: 1px solid var(--border); color: var(--muted); }
+  .fc-btn.restart { background: var(--accent); color: #000; }
+
+  .fc-done {
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    display: none;
+  }
+
+  .fc-done-emoji { font-size: 56px; margin-bottom: 12px; }
+  .fc-done-title { font-size: 22px; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+  .fc-done-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+  .fc-dots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .fc-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
+  .fc-dot.learned { background: var(--correct); }
+  .fc-dot.queued { background: var(--warn); }
 
   p { line-height: 1.7; margin-bottom: 10px; }
 </style>
@@ -523,12 +778,13 @@
 </header>
 
 <nav>
-  <button class="active" onclick="show('s1',this)">1. THE 2x2</button>
+  <button class="active" onclick="show('s1',this)">1. 2×2</button>
   <button onclick="show('s2',this)">2. RISK MATH</button>
   <button onclick="show('s3',this)">3. CALCULATOR</button>
   <button onclick="show('s4',this)">4. DX TESTS</button>
   <button onclick="show('s5',this)">5. DRILL</button>
   <button onclick="show('s6',this)">6. CHEATSHEET</button>
+  <button onclick="show('s7',this)">7. 🃏 FLASHCARDS</button>
 </nav>
 
 <main>
@@ -549,12 +805,12 @@
     <div class="cell label">Exposed <span style="color:var(--accent)">+</span></div>
     <div class="cell a"><span class="cell-letter">a</span><span class="cell-desc">TP / exposed + sick</span></div>
     <div class="cell b"><span class="cell-letter">b</span><span class="cell-desc">FP / exposed + healthy</span></div>
-    <div class="cell total"><span style="font-size:15px;font-family:'JetBrains Mono',monospace;">a+b</span></div>
+    <div class="cell total"><span style="font-size:14px;font-family:'JetBrains Mono',monospace;">a+b</span></div>
 
     <div class="cell label">Exposed <span style="color:var(--accent2)">−</span></div>
     <div class="cell c"><span class="cell-letter">c</span><span class="cell-desc">FN / unexposed + sick</span></div>
     <div class="cell d"><span class="cell-letter">d</span><span class="cell-desc">TN / unexposed + healthy</span></div>
-    <div class="cell total"><span style="font-size:15px;font-family:'JetBrains Mono',monospace;">c+d</span></div>
+    <div class="cell total"><span style="font-size:14px;font-family:'JetBrains Mono',monospace;">c+d</span></div>
 
     <div class="cell header">TOTAL</div>
     <div class="cell total"><span style="font-family:'JetBrains Mono',monospace;">a+c</span></div>
@@ -564,7 +820,7 @@
 
   <div class="tip-box">
     <div class="tip-head">KEY INSIGHT</div>
-    <strong>"Exposed"</strong> = treated group, risk factor group, test positive — depending on question type.<br>
+    <strong>"Exposed"</strong> = treated group, risk factor group, or test positive — depending on question type.<br>
     <strong>"Disease"</strong> = outcome, disease, whatever you're measuring.<br>
     The math is identical regardless of framing.
   </div>
@@ -582,6 +838,10 @@
     <span class="badge obs">Case-Control</span> Can only calculate <strong>OR</strong> (you selected cases and controls — incidence is artificial)<br>
     <span class="badge dx">Cross-Sectional / Dx Study</span> Sensitivity, Specificity, PPV, NPV
   </div>
+
+  <div style="text-align:right;margin-top:8px;">
+    <button class="reset-btn" onclick="show('s3', document.querySelectorAll('nav button')[2])">▶ Play with values in Calculator →</button>
+  </div>
 </div>
 
 <!-- ============ SECTION 2: RISK MATH ============ -->
@@ -591,6 +851,7 @@
 
   <div class="formula-grid">
     <div class="formula-card">
+      <div class="formula-emoji">🎯</div>
       <div class="formula-name">Absolute Risk (AR)</div>
       <div class="formula-eq"><span style="color:var(--accent)">a</span> / (<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</div>
       <div class="formula-tip">
@@ -598,21 +859,23 @@
         Also called <strong>incidence</strong> or <strong>attack rate</strong>.<br>
         Unexposed AR = <span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)
       </div>
+      <div class="formula-killer">⚠ Case-control → cannot calculate AR (no true incidence data)</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">⚖️</div>
       <div class="formula-name">Relative Risk (RR)</div>
       <div class="formula-eq"><span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>) ÷ <span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)</div>
       <div class="formula-tip">
         = [<span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)] / [<span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)]<br>
-        <strong>RR = 1</strong>: no difference<br>
-        <strong>RR &gt; 1</strong>: exposure increases risk<br>
-        <strong>RR &lt; 1</strong>: exposure is protective<br>
+        <strong>RR = 1</strong>: no difference&nbsp;&nbsp;<strong>RR &gt; 1</strong>: harmful&nbsp;&nbsp;<strong>RR &lt; 1</strong>: protective<br>
         Only valid for cohort/RCT.
       </div>
+      <div class="formula-killer">⚠ 95% CI includes 1 → not statistically significant</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">🎲</div>
       <div class="formula-name">Odds Ratio (OR)</div>
       <div class="formula-eq">(<span style="color:var(--accent)">a</span>×<span style="color:var(--warn)">d</span>) / (<span style="color:var(--accent2)">b</span>×<span style="color:var(--accent3)">c</span>)</div>
       <div class="formula-tip">
@@ -621,20 +884,23 @@
         When disease is rare (&lt;10%), OR ≈ RR.<br>
         Interpreted identically to RR.
       </div>
+      <div class="formula-killer">⚠ OR always farther from 1 than RR — never mistake them</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">🛡️</div>
       <div class="formula-name">Absolute Risk Reduction (ARR)</div>
       <div class="formula-eq"><span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>) − <span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</div>
       <div class="formula-tip">
         = [<span style="color:var(--accent3)">c</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)] − [<span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)]<br>
         Always <strong>control minus treatment</strong>.<br>
-        <strong>This is the most clinically meaningful number.</strong><br>
-        How much did treatment actually reduce risk?
+        <strong>This is the most clinically meaningful number.</strong>
       </div>
+      <div class="formula-killer">⚠ Boards: when asked "best reflects clinical benefit" → choose ARR or NNT</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">📢</div>
       <div class="formula-name">Relative Risk Reduction (RRR)</div>
       <div class="formula-eq"><span>ARR / AR<sub>control</sub></span></div>
       <div class="formula-tip">
@@ -642,17 +908,20 @@
         <strong>RRR is misleading when baseline risk is very low.</strong><br>
         "50% RRR" sounds great until ARR = 0.002%.
       </div>
+      <div class="formula-killer">⚠ Pharma ads use RRR. The exam will ask you to see through it</div>
     </div>
 
     <div class="formula-card">
-      <div class="formula-name">NNT / NNH</div>
+      <div class="formula-emoji">💊</div>
+      <div class="formula-name">NNT / ☠️ NNH</div>
       <div class="formula-eq"><span>1 / ARR</span></div>
       <div class="formula-tip">
         Number needed to treat = 1/ARR<br>
         Number needed to harm = 1/ARI (absolute risk increase)<br>
         <strong>Lower NNT = better treatment.</strong><br>
-        <strong>Higher NNH = safer drug.</strong>
+        <strong>Higher NNH = safer drug. Always round UP.</strong>
       </div>
+      <div class="formula-killer">⚠ NNT of 1 = perfect drug. NNT of 1000 = barely any benefit</div>
     </div>
   </div>
 
@@ -666,7 +935,7 @@
 
   <div class="warn-box">
     <div class="warn-head">THE MISLEADING AD TRAP</div>
-    A common question: Drug trial — 2% placebo events, 1% drug events.<br>
+    Drug trial: 2% placebo events, 1% drug events.<br>
     Ad claims: "50% reduction in events!" (That's RRR.)<br>
     The real ARR = 1%. NNT = 100.<br>
     The boards will ask which statistic "most accurately reflects clinical benefit." Answer: <strong>ARR or NNT.</strong>
@@ -676,105 +945,140 @@
 <!-- ============ SECTION 3: CALCULATOR ============ -->
 <div class="section" id="s3">
   <h2>Live Calculator</h2>
-  <p class="tagline">// enter your 2x2 values — all stats compute instantly</p>
+  <p class="tagline">// sliders update everything live — watch the ROC curve move</p>
 
   <div class="calc-container">
-    <p style="color:var(--muted);font-size:12px;margin-bottom:12px;">Enter the four cells of your 2×2 table:</p>
-    <div class="input-grid">
-      <div class="input-group a">
-        <label><span>a</span> — exposed + disease</label>
-        <input type="number" id="ca" value="20" min="0">
-      </div>
-      <div class="input-group b">
-        <label><span>b</span> — exposed + no disease</label>
-        <input type="number" id="cb" value="180" min="0">
-      </div>
-      <div class="input-group c">
-        <label><span>c</span> — unexposed + disease</label>
-        <input type="number" id="cc" value="40" min="0">
-      </div>
-      <div class="input-group d">
-        <label><span>d</span> — unexposed + no disease</label>
-        <input type="number" id="cd" value="160" min="0">
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calculate()">CALCULATE</button>
+    <p style="color:var(--muted);font-size:12px;margin-bottom:14px;">Drag sliders or type values. All stats and the ROC curve update instantly.</p>
 
-    <div class="results-grid" id="results" style="display:none;">
-      <div class="result-item">
-        <div class="result-label">AR (exposed)</div>
-        <div class="result-value" id="r-ar-exp">—</div>
-        <div class="result-note">a / (a+b)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">AR (control)</div>
-        <div class="result-value" id="r-ar-ctrl">—</div>
-        <div class="result-note">c / (c+d)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">RR</div>
-        <div class="result-value" id="r-rr">—</div>
-        <div class="result-note">AR(exp)/AR(ctrl)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">OR</div>
-        <div class="result-value" id="r-or">—</div>
-        <div class="result-note">(a×d)/(b×c)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">ARR</div>
-        <div class="result-value" id="r-arr">—</div>
-        <div class="result-note">AR(ctrl)−AR(exp)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">RRR</div>
-        <div class="result-value" id="r-rrr">—</div>
-        <div class="result-note">ARR/AR(ctrl)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">NNT</div>
-        <div class="result-value" id="r-nnt">—</div>
-        <div class="result-note">1/ARR</div>
-      </div>
-    </div>
-  </div>
+    <div class="calc-layout">
+      <div>
+        <div class="input-grid">
+          <div class="input-group a">
+            <label><span>a</span> — exposed + disease (TP)</label>
+            <input type="number" id="ca" value="20" min="0" max="500" oninput="syncNum('ca')">
+            <input type="range" id="ca-sld" value="20" min="0" max="300" oninput="syncSlider('ca')">
+          </div>
+          <div class="input-group b">
+            <label><span>b</span> — exposed + no disease (FP)</label>
+            <input type="number" id="cb" value="180" min="0" max="500" oninput="syncNum('cb')">
+            <input type="range" id="cb-sld" value="180" min="0" max="300" oninput="syncSlider('cb')">
+          </div>
+          <div class="input-group c">
+            <label><span>c</span> — unexposed + disease (FN)</label>
+            <input type="number" id="cc" value="40" min="0" max="500" oninput="syncNum('cc')">
+            <input type="range" id="cc-sld" value="40" min="0" max="300" oninput="syncSlider('cc')">
+          </div>
+          <div class="input-group d">
+            <label><span>d</span> — unexposed + no disease (TN)</label>
+            <input type="number" id="cd" value="160" min="0" max="500" oninput="syncNum('cd')">
+            <input type="range" id="cd-sld" value="160" min="0" max="300" oninput="syncSlider('cd')">
+          </div>
+        </div>
 
-  <div class="calc-container" id="dx-calc">
-    <p style="font-weight:700;margin-bottom:12px;">Diagnostic Test Calculator</p>
-    <p style="color:var(--muted);font-size:12px;margin-bottom:12px;">Here "exposed" = test positive, "disease" = true disease:</p>
-    <div class="results-grid" id="dx-results" style="display:none;">
-      <div class="result-item">
-        <div class="result-label">Sensitivity</div>
-        <div class="result-value" id="r-sens">—</div>
-        <div class="result-note">a/(a+c)</div>
+        <div class="mini-2x2">
+          <div class="m2-cell header"></div>
+          <div class="m2-cell header" style="color:var(--accent)">Dis+</div>
+          <div class="m2-cell header" style="color:var(--accent2)">Dis−</div>
+          <div class="m2-cell header">Tot</div>
+          <div class="m2-cell label" style="color:var(--accent)">Exp+</div>
+          <div class="m2-cell a" id="m2-a">20</div>
+          <div class="m2-cell b" id="m2-b">180</div>
+          <div class="m2-cell total" id="m2-ab">200</div>
+          <div class="m2-cell label" style="color:var(--accent3)">Exp−</div>
+          <div class="m2-cell c" id="m2-c">40</div>
+          <div class="m2-cell d" id="m2-d">160</div>
+          <div class="m2-cell total" id="m2-cd">200</div>
+          <div class="m2-cell header">Tot</div>
+          <div class="m2-cell total" id="m2-ac">60</div>
+          <div class="m2-cell total" id="m2-bd">340</div>
+          <div class="m2-cell total" id="m2-n">400</div>
+        </div>
       </div>
-      <div class="result-item">
-        <div class="result-label">Specificity</div>
-        <div class="result-value" id="r-spec">—</div>
-        <div class="result-note">d/(b+d)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">PPV</div>
-        <div class="result-value" id="r-ppv">—</div>
-        <div class="result-note">a/(a+b)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">NPV</div>
-        <div class="result-value" id="r-npv">—</div>
-        <div class="result-note">d/(c+d)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">LR+</div>
-        <div class="result-value" id="r-lrp">—</div>
-        <div class="result-note">Sens/(1−Spec)</div>
-      </div>
-      <div class="result-item">
-        <div class="result-label">LR−</div>
-        <div class="result-value" id="r-lrn">—</div>
-        <div class="result-note">(1−Sens)/Spec</div>
+
+      <div>
+        <div class="roc-wrap">
+          <div class="roc-label">ROC Curve — operating point moves with your values</div>
+          <canvas id="roc-canvas" width="320" height="280"></canvas>
+        </div>
       </div>
     </div>
-    <button class="calc-btn" onclick="calculate()" style="background:var(--accent3);">CALCULATE DX STATS</button>
+
+    <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px;">
+      <p style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:10px;">RISK MEASURES (cohort/RCT interpretation)</p>
+      <div class="results-grid">
+        <div class="result-item">
+          <div class="result-label">🎯 AR (exposed)</div>
+          <div class="result-value" id="r-ar-exp">—</div>
+          <div class="result-note">a / (a+b)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">🎯 AR (control)</div>
+          <div class="result-value" id="r-ar-ctrl">—</div>
+          <div class="result-note">c / (c+d)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">⚖️ RR</div>
+          <div class="result-value" id="r-rr">—</div>
+          <div class="result-note">AR(exp)/AR(ctrl)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">🎲 OR</div>
+          <div class="result-value" id="r-or">—</div>
+          <div class="result-note">(a×d)/(b×c)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">🛡️ ARR</div>
+          <div class="result-value" id="r-arr">—</div>
+          <div class="result-note">AR(ctrl)−AR(exp)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">📢 RRR</div>
+          <div class="result-value" id="r-rrr">—</div>
+          <div class="result-note">ARR/AR(ctrl)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">💊 NNT</div>
+          <div class="result-value" id="r-nnt">—</div>
+          <div class="result-note">1/ARR</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px;">
+      <p style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:10px;">DIAGNOSTIC STATS (treat Exposed+ = Test+, Disease+ = True Disease)</p>
+      <div class="results-grid">
+        <div class="result-item">
+          <div class="result-label">🔍 Sensitivity</div>
+          <div class="result-value" id="r-sens">—</div>
+          <div class="result-note">a/(a+c)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">🔒 Specificity</div>
+          <div class="result-value" id="r-spec">—</div>
+          <div class="result-note">d/(b+d)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">✅ PPV</div>
+          <div class="result-value" id="r-ppv">—</div>
+          <div class="result-note">a/(a+b)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">❌ NPV</div>
+          <div class="result-value" id="r-npv">—</div>
+          <div class="result-note">d/(c+d)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">📈 LR+</div>
+          <div class="result-value" id="r-lrp">—</div>
+          <div class="result-note">Sens/(1−Spec)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">📉 LR−</div>
+          <div class="result-value" id="r-lrn">—</div>
+          <div class="result-note">(1−Sens)/Spec</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -785,6 +1089,7 @@
 
   <div class="formula-grid">
     <div class="formula-card">
+      <div class="formula-emoji">🔍</div>
       <div class="formula-name">Sensitivity (SnNout)</div>
       <div class="formula-eq"><span style="color:var(--accent)">a</span> / (<span style="color:var(--accent)">a</span>+<span style="color:var(--accent3)">c</span>)</div>
       <div class="formula-tip">
@@ -793,9 +1098,11 @@
         <strong>High Sens → good screening test.</strong><br>
         Negative result on high-Sens test = rules OUT disease.
       </div>
+      <div class="formula-killer">⚠ Se<strong>N</strong>sitivity: high → <strong>N</strong>egative rules out (SnNout). Does NOT change with prevalence.</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">🔒</div>
       <div class="formula-name">Specificity (SpPin)</div>
       <div class="formula-eq"><span style="color:var(--warn)">d</span> / (<span style="color:var(--accent2)">b</span>+<span style="color:var(--warn)">d</span>)</div>
       <div class="formula-tip">
@@ -804,29 +1111,35 @@
         <strong>High Spec → good confirmatory test.</strong><br>
         Positive result on high-Spec test = rules IN disease.
       </div>
+      <div class="formula-killer">⚠ S<strong>p</strong>ecificity: high → <strong>P</strong>ositive rules in (SpPin). Does NOT change with prevalence.</div>
     </div>
 
     <div class="formula-card">
-      <div class="formula-name">PPV</div>
+      <div class="formula-emoji">✅</div>
+      <div class="formula-name">PPV — Positive Predictive Value</div>
       <div class="formula-eq"><span style="color:var(--accent)">a</span> / (<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</div>
       <div class="formula-tip">
         "If the test is positive, what's the chance the patient actually has it?"<br>
         <strong>PPV depends heavily on prevalence.</strong><br>
         Same test → lower PPV in low-prevalence population.
       </div>
+      <div class="formula-killer">⚠ Low prevalence → lousy PPV even with a great test. Most positives = false positives.</div>
     </div>
 
     <div class="formula-card">
-      <div class="formula-name">NPV</div>
+      <div class="formula-emoji">❌</div>
+      <div class="formula-name">NPV — Negative Predictive Value</div>
       <div class="formula-eq"><span style="color:var(--warn)">d</span> / (<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)</div>
       <div class="formula-tip">
         "If the test is negative, what's the chance they truly don't have it?"<br>
         <strong>NPV also depends on prevalence.</strong><br>
         Higher prevalence → more false negatives → lower NPV.
       </div>
+      <div class="formula-killer">⚠ High prevalence → lower NPV. More disease = more missed cases.</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">📈</div>
       <div class="formula-name">LR+ (Likelihood Ratio +)</div>
       <div class="formula-eq"><span>Sens / (1−Spec)</span></div>
       <div class="formula-tip">
@@ -835,9 +1148,11 @@
         LR+ 2–5 = modest shift.<br>
         <strong>LR is independent of prevalence.</strong>
       </div>
+      <div class="formula-killer">⚠ LR+ > 10 = strong rule-in. Post-test odds = pre-test odds × LR+</div>
     </div>
 
     <div class="formula-card">
+      <div class="formula-emoji">📉</div>
       <div class="formula-name">LR− (Likelihood Ratio −)</div>
       <div class="formula-eq"><span>(1−Sens) / Spec</span></div>
       <div class="formula-tip">
@@ -846,6 +1161,7 @@
         LR− 0.2–0.5 = modest shift down.<br>
         Post-test odds = Pre-test odds × LR
       </div>
+      <div class="formula-killer">⚠ LR− &lt; 0.1 = strong rule-out. LR is prevalence-independent, unlike PPV/NPV.</div>
     </div>
   </div>
 
@@ -860,21 +1176,22 @@
   <div class="tip-box">
     <div class="tip-head">MNEMONIC</div>
     <strong>SnNout</strong>: High Se<strong>N</strong>sitivity → <strong>N</strong>egative rules <strong>out</strong><br>
-    <strong>SpPin</strong>: High S<strong>p</strong>ecificity → <strong>P</strong>ositive rules <strong>in</strong>
+    <strong>SpPin</strong>: High S<strong>p</strong>ecificity → <strong>P</strong>ositive rules <strong>in</strong><br><br>
+    PPV &amp; NPV change with <strong>prevalence</strong>. Sens &amp; Spec do <strong>NOT</strong>. LR does <strong>NOT</strong>.
   </div>
 
   <div class="tip-box">
     <div class="tip-head">CHANGING THE THRESHOLD</div>
-    If you make a test more sensitive (lower threshold) → more true positives but also more false positives → Specificity drops.<br>
-    Sensitivity and Specificity have an inverse tradeoff. This is the ROC curve concept.<br>
-    PPV and NPV shift with <strong>prevalence</strong>. Sens and Spec do NOT.
+    Lower threshold → more positives → Sensitivity ↑, Specificity ↓<br>
+    Raise threshold → fewer positives → Sensitivity ↓, Specificity ↑<br>
+    They always move in opposite directions — this is the ROC curve tradeoff.
   </div>
 </div>
 
 <!-- ============ SECTION 5: DRILL ============ -->
 <div class="section" id="s5">
   <h2>Board Question Drill</h2>
-  <p class="tagline">// 6 questions. full board format. worked solutions.</p>
+  <p class="tagline">// 10 questions. full board format. worked solutions.</p>
 
   <div class="score-bar">
     <div class="score-item">
@@ -886,21 +1203,20 @@
       <div class="score-lbl">wrong</div>
     </div>
     <div class="score-item">
-      <div class="score-num" id="score-total" style="color:var(--muted)">0/6</div>
+      <div class="score-num" id="score-total" style="color:var(--muted)">0/10</div>
       <div class="score-lbl">answered</div>
     </div>
     <div class="progress-dots" id="progress-dots">
-      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
+    <button class="reset-btn" onclick="resetDrill()">↺ RESET</button>
   </div>
 
   <!-- Q1 -->
   <div class="question-card" id="q1">
-    <div class="q-number">QUESTION 01 / NNT</div>
-    <div class="q-stem">
-      A randomized controlled trial evaluates a new statin in patients with known coronary artery disease. Over 5 years, 8% of patients in the statin group experienced a myocardial infarction, compared to 12% of patients in the placebo group.
-    </div>
+    <div class="q-number">Q01 / 💊 NNT</div>
+    <div class="q-stem">A randomized controlled trial evaluates a new statin in patients with known coronary artery disease. Over 5 years, 8% of patients in the statin group experienced a myocardial infarction, compared to 12% of patients in the placebo group.</div>
     <div class="q-ask">What is the number needed to treat (NNT) to prevent one MI over 5 years?</div>
     <ul class="choices">
       <li><button class="choice-btn" onclick="answer(1,'A','D')"><span class="choice-letter">A</span> 4</button></li>
@@ -912,16 +1228,14 @@
     <div class="explanation" id="exp1">
       <div class="step"><strong>STEP 1 — ARR:</strong><br><span class="eq">ARR = AR(control) − AR(treated) = 0.12 − 0.08 = 0.04</span></div>
       <div class="step"><strong>STEP 2 — NNT:</strong><br><span class="eq">NNT = 1 / ARR = 1 / 0.04 = 25</span></div>
-      <div class="step">You need to treat 25 patients for 5 years to prevent 1 MI. ✓</div>
+      <div class="step">Treat 25 patients for 5 years to prevent 1 MI. ✓</div>
     </div>
   </div>
 
   <!-- Q2 -->
   <div class="question-card" id="q2">
-    <div class="q-number">QUESTION 02 / ODDS RATIO</div>
-    <div class="q-stem">
-      A case-control study examines the association between smoking and bladder cancer. Among 100 cases (bladder cancer), 60 are smokers. Among 100 controls, 30 are smokers.
-    </div>
+    <div class="q-number">Q02 / 🎲 ODDS RATIO</div>
+    <div class="q-stem">A case-control study examines the association between smoking and bladder cancer. Among 100 cases (bladder cancer), 60 are smokers. Among 100 controls, 30 are smokers.</div>
     <div class="q-ask">What is the odds ratio for the association between smoking and bladder cancer?</div>
     <ul class="choices">
       <li><button class="choice-btn" onclick="answer(2,'A','C')"><span class="choice-letter">A</span> 0.5</button></li>
@@ -931,20 +1245,16 @@
       <li><button class="choice-btn" onclick="answer(2,'E','C')"><span class="choice-letter">E</span> 6.0</button></li>
     </ul>
     <div class="explanation" id="exp2">
-      <div class="step"><strong>STEP 1 — Build the 2×2:</strong><br>
-      Cases: 60 smokers (a), 40 non-smokers (c)<br>
-      Controls: 30 smokers (b), 70 non-smokers (d)</div>
-      <div class="step"><strong>STEP 2 — OR formula:</strong><br>
-      <span class="eq">OR = (a×d)/(b×c) = (60×70)/(30×40) = 4200/1200 = 3.5</span></div>
+      <div class="step"><strong>STEP 1 — Build the 2×2:</strong><br>Cases: 60 smokers (a), 40 non-smokers (c)<br>Controls: 30 smokers (b), 70 non-smokers (d)</div>
+      <div class="step"><strong>STEP 2 — OR formula:</strong><br><span class="eq">OR = (a×d)/(b×c) = (60×70)/(30×40) = 4200/1200 = 3.5</span></div>
       <div class="step">Case-control → OR is the only valid measure. Cannot calculate RR. ✓</div>
     </div>
   </div>
 
   <!-- Q3 -->
   <div class="question-card" id="q3">
-    <div class="q-number">QUESTION 03 / SENSITIVITY & SPECIFICITY</div>
-    <div class="q-stem">
-      A new rapid test for pulmonary embolism is evaluated in 400 patients. Results:
+    <div class="q-number">Q03 / 🔍🔒 SENSITIVITY & SPECIFICITY</div>
+    <div class="q-stem">A new rapid test for pulmonary embolism is evaluated in 400 patients. Results:
       <table class="q-table">
         <tr><th></th><th>PE Present</th><th>PE Absent</th></tr>
         <tr><td>Test +</td><td>90</td><td>40</td></tr>
@@ -961,18 +1271,16 @@
     </ul>
     <div class="explanation" id="exp3">
       <div class="step"><strong>a=90, b=40, c=10, d=260</strong></div>
-      <div class="step"><strong>Sensitivity</strong> = a/(a+c) = 90/(90+10) = 90/100 = <span class="eq">90%</span></div>
-      <div class="step"><strong>Specificity</strong> = d/(b+d) = 260/(40+260) = 260/300 = <span class="eq">86.7% ≈ 87%</span></div>
-      <div class="step">A negative test has 90% sensitivity → useful for ruling OUT PE. ✓</div>
+      <div class="step"><strong>Sensitivity</strong> = a/(a+c) = 90/100 = <span class="eq">90%</span></div>
+      <div class="step"><strong>Specificity</strong> = d/(b+d) = 260/300 = <span class="eq">86.7% ≈ 87%</span></div>
+      <div class="step">90% sensitivity → a negative result helps rule OUT PE (SnNout). ✓</div>
     </div>
   </div>
 
   <!-- Q4 -->
   <div class="question-card" id="q4">
-    <div class="q-number">QUESTION 04 / THE MISLEADING AD</div>
-    <div class="q-stem">
-      A pharmaceutical rep presents data on a new anticoagulant. In a RCT of 10,000 patients: 1% of the treatment group and 2% of the placebo group had a stroke over 3 years. The rep claims the drug "reduces stroke risk by 50%."
-    </div>
+    <div class="q-number">Q04 / 📢 THE MISLEADING AD</div>
+    <div class="q-stem">A pharmaceutical rep presents data on a new anticoagulant. In a RCT of 10,000 patients: 1% of the treatment group and 2% of the placebo group had a stroke over 3 years. The rep claims the drug "reduces stroke risk by 50%."</div>
     <div class="q-ask">Which of the following most accurately describes the clinical benefit of this drug?</div>
     <ul class="choices">
       <li><button class="choice-btn" onclick="answer(4,'A','B')"><span class="choice-letter">A</span> RRR = 50%, which accurately reflects clinical benefit</button></li>
@@ -985,17 +1293,15 @@
       <div class="step"><strong>STEP 1:</strong> The rep cited RRR = (2%-1%)/2% = 50%. Technically correct but misleading.</div>
       <div class="step"><strong>STEP 2 — ARR:</strong> <span class="eq">0.02 − 0.01 = 0.01 = 1%</span></div>
       <div class="step"><strong>STEP 3 — NNT:</strong> <span class="eq">1/0.01 = 100</span></div>
-      <div class="step">You must treat 100 patients for 3 years to prevent 1 stroke. This is the clinically meaningful measure. The boards always choose ARR/NNT over RRR. ✓</div>
+      <div class="step">Treat 100 patients for 3 years to prevent 1 stroke. The boards always choose ARR/NNT over RRR. ✓</div>
     </div>
   </div>
 
   <!-- Q5 -->
   <div class="question-card" id="q5">
-    <div class="q-number">QUESTION 05 / PPV AND PREVALENCE</div>
-    <div class="q-stem">
-      A screening test for a rare genetic disorder has a sensitivity of 99% and specificity of 99%. The disease prevalence in the general population is 1 in 1,000. A randomly selected patient tests positive.
-    </div>
-    <div class="q-ask">What is the approximate positive predictive value (PPV)?</div>
+    <div class="q-number">Q05 / ✅ PPV AND PREVALENCE</div>
+    <div class="q-stem">A screening test for a rare genetic disorder has sensitivity 99% and specificity 99%. Disease prevalence = 1 in 1,000. A randomly selected patient tests positive.</div>
+    <div class="q-ask">What is the approximate PPV?</div>
     <ul class="choices">
       <li><button class="choice-btn" onclick="answer(5,'A','C')"><span class="choice-letter">A</span> 99%</button></li>
       <li><button class="choice-btn" onclick="answer(5,'B','C')"><span class="choice-letter">B</span> 50%</button></li>
@@ -1004,38 +1310,109 @@
       <li><button class="choice-btn" onclick="answer(5,'E','C')"><span class="choice-letter">E</span> ~0.1%</button></li>
     </ul>
     <div class="explanation" id="exp5">
-      <div class="step"><strong>Build 2×2 for 100,000 people:</strong><br>
-      Disease prevalence = 1/1000 → 100 have disease, 99,900 don't</div>
-      <div class="step">
-      Sens 99%: true positives = 99, false negatives = 1<br>
-      Spec 99%: true negatives = 98,901, false positives = 999</div>
-      <div class="step"><strong>PPV</strong> = TP/(TP+FP) = <span class="eq">99/(99+999) = 99/1098 ≈ 9%</span></div>
-      <div class="step">Even with an excellent test, rare disease → most positives are false positives. This is why we confirm positives with a second test. ✓</div>
+      <div class="step"><strong>100,000 people:</strong> 100 have disease, 99,900 don't</div>
+      <div class="step">Sens 99% → TP=99, FN=1 &nbsp;|&nbsp; Spec 99% → TN=98,901, FP=999</div>
+      <div class="step"><strong>PPV</strong> = 99/(99+999) = <span class="eq">99/1098 ≈ 9%</span></div>
+      <div class="step">Even with an excellent test, rare disease = most positives are false positives. ✓</div>
     </div>
   </div>
 
   <!-- Q6 -->
   <div class="question-card" id="q6">
-    <div class="q-number">QUESTION 06 / INTEGRATED (FULL BOARD FORMAT)</div>
-    <div class="q-stem">
-      A cohort study follows 500 hypertensive patients on an ACE inhibitor and 500 matched controls not on an ACE inhibitor for 10 years. 30 ACE inhibitor patients develop CKD; 60 control patients develop CKD.
-    </div>
-    <div class="q-ask">Which of the following BEST describes the effect of ACE inhibitors on CKD development in this cohort?</div>
+    <div class="q-number">Q06 / ⚖️🛡️💊 INTEGRATED</div>
+    <div class="q-stem">A cohort study follows 500 hypertensive patients on ACE inhibitor and 500 matched controls for 10 years. 30 ACE inhibitor patients develop CKD; 60 control patients develop CKD.</div>
+    <div class="q-ask">Which of the following BEST describes the effect of ACE inhibitors on CKD?</div>
     <ul class="choices">
-      <li><button class="choice-btn" onclick="answer(6,'A','D')"><span class="choice-letter">A</span> RR = 0.5; the drug reduces risk to half; NNT = 16</button></li>
-      <li><button class="choice-btn" onclick="answer(6,'B','D')"><span class="choice-letter">B</span> OR = 0.44; the drug is protective; NNT cannot be calculated in a cohort study</button></li>
+      <li><button class="choice-btn" onclick="answer(6,'A','D')"><span class="choice-letter">A</span> RR = 0.5; NNT = 16</button></li>
+      <li><button class="choice-btn" onclick="answer(6,'B','D')"><span class="choice-letter">B</span> OR = 0.44; NNT cannot be calculated in a cohort study</button></li>
       <li><button class="choice-btn" onclick="answer(6,'C','D')"><span class="choice-letter">C</span> ARR = 12%; NNT = 17</button></li>
       <li><button class="choice-btn" onclick="answer(6,'D','D')"><span class="choice-letter">D</span> RR = 0.5; ARR = 6%; NNT = 17</button></li>
       <li><button class="choice-btn" onclick="answer(6,'E','D')"><span class="choice-letter">E</span> RRR = 50%; this is the best measure of clinical benefit</button></li>
     </ul>
     <div class="explanation" id="exp6">
       <div class="step"><strong>a=30, b=470, c=60, d=440</strong></div>
-      <div class="step"><strong>AR(treated)</strong> = 30/500 = 0.06 = 6%<br>
-      <strong>AR(control)</strong> = 60/500 = 0.12 = 12%</div>
-      <div class="step"><strong>RR</strong> = 0.06/0.12 = <span class="eq">0.5</span> (protective — reduces risk by half)</div>
-      <div class="step"><strong>ARR</strong> = 0.12 − 0.06 = <span class="eq">0.06 = 6%</span></div>
-      <div class="step"><strong>NNT</strong> = 1/0.06 = <span class="eq">16.7 ≈ 17</span></div>
-      <div class="step">Choice A has NNT=16 (close but uses 1/ARR=1/0.06=16.7→17). Choice D is exact. RRR=50% but ARR+NNT is the clinically meaningful summary. ✓</div>
+      <div class="step"><strong>RR</strong> = (30/500)/(60/500) = <span class="eq">0.5</span></div>
+      <div class="step"><strong>ARR</strong> = 0.12 − 0.06 = <span class="eq">6%</span></div>
+      <div class="step"><strong>NNT</strong> = 1/0.06 = <span class="eq">16.7 → round up to 17</span></div>
+      <div class="step">Choice A says NNT=16 (rounds wrong). Choice D is exact. ✓</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card" id="q7">
+    <div class="q-number">Q07 / 📈 LIKELIHOOD RATIO</div>
+    <div class="q-stem">A bedside test for Lyme disease has sensitivity 80% and specificity 95%. A patient from an endemic area tests positive.</div>
+    <div class="q-ask">What is the likelihood ratio positive (LR+) for this test?</div>
+    <ul class="choices">
+      <li><button class="choice-btn" onclick="answer(7,'A','C')"><span class="choice-letter">A</span> 4</button></li>
+      <li><button class="choice-btn" onclick="answer(7,'B','C')"><span class="choice-letter">B</span> 8</button></li>
+      <li><button class="choice-btn" onclick="answer(7,'C','C')"><span class="choice-letter">C</span> 16</button></li>
+      <li><button class="choice-btn" onclick="answer(7,'D','C')"><span class="choice-letter">D</span> 20</button></li>
+      <li><button class="choice-btn" onclick="answer(7,'E','C')"><span class="choice-letter">E</span> 0.21</button></li>
+    </ul>
+    <div class="explanation" id="exp7">
+      <div class="step"><strong>LR+ = Sens / (1 − Spec)</strong></div>
+      <div class="step"><span class="eq">LR+ = 0.80 / (1 − 0.95) = 0.80 / 0.05 = 16</span></div>
+      <div class="step">LR+ &gt; 10 = strong evidence for disease. This is a good confirmatory test. E (0.21) is the LR−. ✓</div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card" id="q8">
+    <div class="q-number">Q08 / 🔍🔒 CHANGING THE THRESHOLD</div>
+    <div class="q-stem">A researcher lowers the positivity threshold for a urine dipstick test for UTI, capturing more patients as "positive." Which of the following is MOST LIKELY to occur?</div>
+    <div class="q-ask">Select the best answer.</div>
+    <ul class="choices">
+      <li><button class="choice-btn" onclick="answer(8,'A','B')"><span class="choice-letter">A</span> Sensitivity decreases, specificity increases</button></li>
+      <li><button class="choice-btn" onclick="answer(8,'B','B')"><span class="choice-letter">B</span> Sensitivity increases, specificity decreases</button></li>
+      <li><button class="choice-btn" onclick="answer(8,'C','B')"><span class="choice-letter">C</span> Both sensitivity and specificity increase</button></li>
+      <li><button class="choice-btn" onclick="answer(8,'D','B')"><span class="choice-letter">D</span> PPV increases</button></li>
+      <li><button class="choice-btn" onclick="answer(8,'E','B')"><span class="choice-letter">E</span> LR+ increases</button></li>
+    </ul>
+    <div class="explanation" id="exp8">
+      <div class="step">Lowering the threshold = calling more results "positive."</div>
+      <div class="step">More positives → more TP captured → <strong>Sensitivity ↑</strong></div>
+      <div class="step">But more FP also captured → <strong>Specificity ↓</strong></div>
+      <div class="step">Sens and Spec always move in opposite directions as threshold shifts. This is the ROC tradeoff. PPV and LR+ both fall (more false positives dilute them). ✓</div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-card" id="q9">
+    <div class="q-number">Q09 / 🎲 STUDY DESIGN → WHICH STAT</div>
+    <div class="q-stem">Investigators identify 300 patients with newly diagnosed lung cancer and 300 age-matched patients without cancer. They survey both groups about lifetime asbestos exposure. Which measure of association is most appropriate?</div>
+    <div class="q-ask">Select the best answer.</div>
+    <ul class="choices">
+      <li><button class="choice-btn" onclick="answer(9,'A','C')"><span class="choice-letter">A</span> Relative risk</button></li>
+      <li><button class="choice-btn" onclick="answer(9,'B','C')"><span class="choice-letter">B</span> Attributable risk percent</button></li>
+      <li><button class="choice-btn" onclick="answer(9,'C','C')"><span class="choice-letter">C</span> Odds ratio</button></li>
+      <li><button class="choice-btn" onclick="answer(9,'D','C')"><span class="choice-letter">D</span> Number needed to treat</button></li>
+      <li><button class="choice-btn" onclick="answer(9,'E','C')"><span class="choice-letter">E</span> Absolute risk reduction</button></li>
+    </ul>
+    <div class="explanation" id="exp9">
+      <div class="step">This is a <strong>case-control study</strong> — you selected based on outcome (cancer vs no cancer).</div>
+      <div class="step">Because you selected on outcome, you cannot calculate true incidence → <strong>no RR, no AR, no ARR, no NNT</strong>.</div>
+      <div class="step"><strong>OR is the only valid association measure</strong> in case-control studies. ✓</div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-card" id="q10">
+    <div class="q-number">Q10 / TYPE I / TYPE II ERROR</div>
+    <div class="q-stem">A randomized trial comparing two antibiotic regimens uses α = 0.05 and β = 0.20 (power = 80%). The trial ends with p = 0.18, showing no statistically significant difference. The researchers suspect the sample size was too small.</div>
+    <div class="q-ask">Which error is most likely occurring?</div>
+    <ul class="choices">
+      <li><button class="choice-btn" onclick="answer(10,'A','D')"><span class="choice-letter">A</span> Type I error — concluding benefit when none exists</button></li>
+      <li><button class="choice-btn" onclick="answer(10,'B','D')"><span class="choice-letter">B</span> The α threshold was set too high</button></li>
+      <li><button class="choice-btn" onclick="answer(10,'C','D')"><span class="choice-letter">C</span> The study had too much power</button></li>
+      <li><button class="choice-btn" onclick="answer(10,'D','D')"><span class="choice-letter">D</span> Type II error — missing a real difference due to inadequate sample size</button></li>
+      <li><button class="choice-btn" onclick="answer(10,'E','D')"><span class="choice-letter">E</span> Confounding bias</button></li>
+    </ul>
+    <div class="explanation" id="exp10">
+      <div class="step"><strong>Type I error (α)</strong> = false positive — concluding there IS a difference when there isn't. p &lt; 0.05.</div>
+      <div class="step"><strong>Type II error (β)</strong> = false negative — MISSING a real difference. More likely with small samples.</div>
+      <div class="step">p = 0.18 → not significant. But this could mean no effect OR the sample was too small to detect it → <strong>Type II error</strong>.</div>
+      <div class="step"><span class="eq">Power = 1 − β = 80%</span>. Increasing sample size ↑ power ↓ Type II error risk. ✓</div>
     </div>
   </div>
 
@@ -1048,66 +1425,213 @@
 
   <div class="cheat-section">
     <h3>Risk Measures</h3>
-    <div class="cheat-row"><span class="cheat-key">AR</span><span class="cheat-val">a/(a+b)</span><span class="cheat-note">incidence in exposed</span></div>
-    <div class="cheat-row"><span class="cheat-key">RR</span><span class="cheat-val">AR(exp)/AR(ctrl)</span><span class="cheat-note">cohort/RCT only</span></div>
-    <div class="cheat-row"><span class="cheat-key">OR</span><span class="cheat-val">(a×d)/(b×c)</span><span class="cheat-note">case-control; rare disease OR≈RR</span></div>
-    <div class="cheat-row"><span class="cheat-key">ARR</span><span class="cheat-val">AR(ctrl)−AR(exp)</span><span class="cheat-note">most clinically meaningful</span></div>
-    <div class="cheat-row"><span class="cheat-key">RRR</span><span class="cheat-val">ARR/AR(ctrl)</span><span class="cheat-note">misleading at low baseline risk</span></div>
-    <div class="cheat-row"><span class="cheat-key">NNT</span><span class="cheat-val">1/ARR</span><span class="cheat-note">lower = better; round up</span></div>
-    <div class="cheat-row"><span class="cheat-key">NNH</span><span class="cheat-val">1/ARI</span><span class="cheat-note">higher = safer</span></div>
+    <div class="cheat-row">
+      <span class="cheat-key">🎯 AR</span>
+      <span class="cheat-val"><span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</span>
+      <span class="cheat-note">incidence in exposed</span>
+      <span class="cheat-killer">Case-control → cannot calculate AR</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">⚖️ RR</span>
+      <span class="cheat-val">AR(exp)/AR(ctrl)</span>
+      <span class="cheat-note">cohort/RCT only</span>
+      <span class="cheat-killer">CI crosses 1 → not significant. RR&lt;1 = protective</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">🎲 OR</span>
+      <span class="cheat-val">(<span style="color:var(--accent)">a</span>×<span style="color:var(--warn)">d</span>)/(<span style="color:var(--accent2)">b</span>×<span style="color:var(--accent3)">c</span>)</span>
+      <span class="cheat-note">case-control; rare disease OR≈RR</span>
+      <span class="cheat-killer">OR always farther from 1 than RR. Never confuse them.</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">🛡️ ARR</span>
+      <span class="cheat-val">AR(ctrl)−AR(exp)</span>
+      <span class="cheat-note">most clinically meaningful</span>
+      <span class="cheat-killer">Boards: "best reflects benefit" → ARR or NNT, not RRR</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">📢 RRR</span>
+      <span class="cheat-val">ARR/AR(ctrl)</span>
+      <span class="cheat-note">misleading at low baseline risk</span>
+      <span class="cheat-killer">Pharma uses this. Low baseline risk = tiny ARR despite large RRR</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">💊 NNT</span>
+      <span class="cheat-val">1/ARR</span>
+      <span class="cheat-note">lower = better; round UP</span>
+      <span class="cheat-killer">NNT=1 perfect; NNT=1000 barely works</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">☠️ NNH</span>
+      <span class="cheat-val">1/ARI</span>
+      <span class="cheat-note">higher = safer drug</span>
+      <span class="cheat-killer">ARI = absolute risk increase caused by exposure/drug</span>
+    </div>
   </div>
 
   <div class="cheat-section">
     <h3>Diagnostic Tests</h3>
-    <div class="cheat-row"><span class="cheat-key">Sens</span><span class="cheat-val">a/(a+c) = TP/all sick</span><span class="cheat-note">SnNout. −result rules OUT</span></div>
-    <div class="cheat-row"><span class="cheat-key">Spec</span><span class="cheat-val">d/(b+d) = TN/all healthy</span><span class="cheat-note">SpPin. +result rules IN</span></div>
-    <div class="cheat-row"><span class="cheat-key">PPV</span><span class="cheat-val">a/(a+b)</span><span class="cheat-note">↑ with prevalence</span></div>
-    <div class="cheat-row"><span class="cheat-key">NPV</span><span class="cheat-val">d/(c+d)</span><span class="cheat-note">↓ with prevalence</span></div>
-    <div class="cheat-row"><span class="cheat-key">LR+</span><span class="cheat-val">Sens/(1−Spec)</span><span class="cheat-note">&gt;10 = strong rule-in</span></div>
-    <div class="cheat-row"><span class="cheat-key">LR−</span><span class="cheat-val">(1−Sens)/Spec</span><span class="cheat-note">&lt;0.1 = strong rule-out</span></div>
+    <div class="cheat-row">
+      <span class="cheat-key">🔍 Sens</span>
+      <span class="cheat-val"><span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent3)">c</span>) = TP/all sick</span>
+      <span class="cheat-note">SnNout — NEG rules OUT</span>
+      <span class="cheat-killer">Does NOT change with prevalence. Changes with threshold.</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">🔒 Spec</span>
+      <span class="cheat-val"><span style="color:var(--warn)">d</span>/(<span style="color:var(--accent2)">b</span>+<span style="color:var(--warn)">d</span>) = TN/all healthy</span>
+      <span class="cheat-note">SpPin — POS rules IN</span>
+      <span class="cheat-killer">Does NOT change with prevalence. Changes with threshold.</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">✅ PPV</span>
+      <span class="cheat-val"><span style="color:var(--accent)">a</span>/(<span style="color:var(--accent)">a</span>+<span style="color:var(--accent2)">b</span>)</span>
+      <span class="cheat-note">↑ with prevalence</span>
+      <span class="cheat-killer">Low prevalence → terrible PPV even with 99% sens/spec</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">❌ NPV</span>
+      <span class="cheat-val"><span style="color:var(--warn)">d</span>/(<span style="color:var(--accent3)">c</span>+<span style="color:var(--warn)">d</span>)</span>
+      <span class="cheat-note">↓ with prevalence</span>
+      <span class="cheat-killer">High prevalence → lower NPV (more false negatives)</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">📈 LR+</span>
+      <span class="cheat-val">Sens/(1−Spec)</span>
+      <span class="cheat-note">&gt;10 = strong rule-in</span>
+      <span class="cheat-killer">Prevalence-INDEPENDENT. Post-test odds = pre-test odds × LR+</span>
+    </div>
+    <div class="cheat-row">
+      <span class="cheat-key">📉 LR−</span>
+      <span class="cheat-val">(1−Sens)/Spec</span>
+      <span class="cheat-note">&lt;0.1 = strong rule-out</span>
+      <span class="cheat-killer">Prevalence-INDEPENDENT. LR− &lt; 0.1 = very strong rule-out</span>
+    </div>
   </div>
 
   <div class="cheat-section">
     <h3>Study Design Rules</h3>
-    <div class="cheat-row"><span class="cheat-key">RCT/Cohort</span><span class="cheat-val">RR, OR, ARR, NNT</span><span class="cheat-note">gold standard</span></div>
-    <div class="cheat-row"><span class="cheat-key">Case-ctrl</span><span class="cheat-val">OR only</span><span class="cheat-note">no incidence → no RR</span></div>
+    <div class="cheat-row"><span class="cheat-key">RCT/Cohort</span><span class="cheat-val">RR, OR, ARR, NNT</span><span class="cheat-note">gold standard for causation</span></div>
+    <div class="cheat-row"><span class="cheat-key">Case-ctrl</span><span class="cheat-val">OR only</span><span class="cheat-note">no incidence → no RR</span><span class="cheat-killer">Good for rare diseases; remember: selected on outcome</span></div>
     <div class="cheat-row"><span class="cheat-key">Cross-sect</span><span class="cheat-val">prevalence, OR</span><span class="cheat-note">snapshot in time</span></div>
   </div>
 
   <div class="cheat-section">
-    <h3>Interpretation Rules</h3>
-    <div class="cheat-row"><span class="cheat-key">RR=1 / OR=1</span><span class="cheat-val">no association</span><span class="cheat-note"></span></div>
-    <div class="cheat-row"><span class="cheat-key">95% CI crosses 1</span><span class="cheat-val">not statistically significant</span><span class="cheat-note">for RR and OR</span></div>
-    <div class="cheat-row"><span class="cheat-key">95% CI crosses 0</span><span class="cheat-val">not significant</span><span class="cheat-note">for differences/ARR</span></div>
-    <div class="cheat-row"><span class="cheat-key">p &lt; 0.05</span><span class="cheat-val">statistically significant</span><span class="cheat-note">not same as clinically meaningful</span></div>
-    <div class="cheat-row"><span class="cheat-key">Type I error</span><span class="cheat-val">false positive (α = 0.05)</span><span class="cheat-note">concluding effect when none exists</span></div>
-    <div class="cheat-row"><span class="cheat-key">Type II error</span><span class="cheat-val">false negative (β = 0.20)</span><span class="cheat-note">missing a real effect</span></div>
+    <h3>Interpretation &amp; Errors</h3>
+    <div class="cheat-row"><span class="cheat-key">RR=1 / OR=1</span><span class="cheat-val">no association</span></div>
+    <div class="cheat-row"><span class="cheat-key">CI crosses 1</span><span class="cheat-val">not significant</span><span class="cheat-note">for RR and OR</span></div>
+    <div class="cheat-row"><span class="cheat-key">CI crosses 0</span><span class="cheat-val">not significant</span><span class="cheat-note">for differences (ARR)</span></div>
+    <div class="cheat-row"><span class="cheat-key">p &lt; 0.05</span><span class="cheat-val">statistically significant</span><span class="cheat-note">≠ clinically meaningful</span></div>
+    <div class="cheat-row"><span class="cheat-key">Type I (α)</span><span class="cheat-val">false positive — α = 0.05</span><span class="cheat-note">concluding effect when none</span><span class="cheat-killer">p &lt; 0.05 = Type I risk ≤ 5%</span></div>
+    <div class="cheat-row"><span class="cheat-key">Type II (β)</span><span class="cheat-val">false negative — β = 0.20</span><span class="cheat-note">missing a real effect</span><span class="cheat-killer">Small sample size → ↑ Type II risk</span></div>
     <div class="cheat-row"><span class="cheat-key">Power</span><span class="cheat-val">1 − β = 80%</span><span class="cheat-note">↑ sample size → ↑ power</span></div>
   </div>
 
   <div class="tip-box">
     <div class="tip-head">EXAM STRATEGY — 30 SECOND ALGORITHM</div>
     1. What study type? → determines which stats are valid<br>
-    2. Build 2×2 (a, b, c, d) from the data given<br>
+    2. Build 2×2 (<strong style="color:var(--accent)">a</strong>, <strong style="color:var(--accent2)">b</strong>, <strong style="color:var(--accent3)">c</strong>, <strong style="color:var(--warn)">d</strong>) from the data given<br>
     3. What are they asking? → apply one formula<br>
     4. Does the answer make biologic sense?<br>
     If RRR vs ARR question → <strong>always choose ARR/NNT as "most meaningful"</strong>
   </div>
 </div>
 
+<!-- ============ SECTION 7: FLASHCARDS ============ -->
+<div class="section" id="s7">
+  <h2>🃏 Flash Cards</h2>
+  <p class="tagline">// tap to flip · Space = flip · → = got it · ← = again</p>
+
+  <div class="fc-progress-bar">
+    <span class="fc-progress-text" id="fc-progress-text">0 / 13 learned</span>
+    <div class="fc-dots" id="fc-dots"></div>
+    <div class="fc-controls">
+      <button class="fc-btn shuffle" onclick="shuffleCards()">↺ Shuffle</button>
+    </div>
+  </div>
+
+  <div id="fc-card-area">
+    <div class="fc-hint">Tap card to flip &nbsp;|&nbsp; Space = flip &nbsp;|&nbsp; → = Got it &nbsp;|&nbsp; ← = Again</div>
+
+    <div class="fc-perspective">
+      <div class="fc-card" id="fc-card" onclick="flipCard()">
+        <div class="fc-face fc-front">
+          <div class="fc-big-emoji" id="fc-emoji">🎯</div>
+          <div class="fc-front-name" id="fc-name">AR — Absolute Risk</div>
+          <div class="fc-front-hint">tap to reveal formula &amp; killer fact</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-back-formula" id="fc-formula">a / (a+b)</div>
+          <div class="fc-back-meaning" id="fc-meaning">Fraction of exposed people who got sick. Also called incidence or attack rate.</div>
+          <div class="fc-back-killer" id="fc-killer">⚠ Case-control → cannot calculate AR. No true incidence data.</div>
+          <div class="fc-back-mnemonic" id="fc-mnemonic">🎯 Bullseye = direct hit rate in exposed group</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-actions" id="fc-actions">
+      <button class="fc-btn again" onclick="fcAgain()">← Again</button>
+      <button class="fc-btn got-it" onclick="fcGotIt()">Got it →</button>
+    </div>
+  </div>
+
+  <div class="fc-done" id="fc-done">
+    <div class="fc-done-emoji">🏆</div>
+    <div class="fc-done-title">All 13 metrics locked in!</div>
+    <div class="fc-done-sub">You've cleared the deck. Go crush that exam.</div>
+    <button class="fc-btn restart" onclick="restartFlashCards()">↺ Restart deck</button>
+  </div>
+</div>
+
 </main>
 
 <script>
+// ─── NAV ───────────────────────────────────────────────────────────────────
 function show(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (id === 's3') { liveCalculate(); }
+  if (id === 's7') { renderFCCard(); }
 }
 
-function fmt(n, decimals=2) {
-  if (!isFinite(n)) return '—';
+// ─── SLIDER SYNC ───────────────────────────────────────────────────────────
+function syncSlider(id) {
+  document.getElementById(id).value = document.getElementById(id + '-sld').value;
+  liveCalculate();
+  updateSliderTrack(id);
+}
+
+function syncNum(id) {
+  const v = document.getElementById(id).value;
+  document.getElementById(id + '-sld').value = v;
+  liveCalculate();
+  updateSliderTrack(id);
+}
+
+function updateSliderTrack(id) {
+  const sld = document.getElementById(id + '-sld');
+  const pct = ((sld.value - sld.min) / (sld.max - sld.min)) * 100;
+  const colorMap = { ca: 'var(--accent)', cb: 'var(--accent2)', cc: 'var(--accent3)', cd: 'var(--warn)' };
+  const col = colorMap[id] || 'var(--accent)';
+  sld.style.background = `linear-gradient(to right, ${col} ${pct}%, var(--border) ${pct}%)`;
+}
+
+function initSliderTracks() {
+  ['ca','cb','cc','cd'].forEach(updateSliderTrack);
+}
+
+// ─── CALCULATOR ────────────────────────────────────────────────────────────
+function fmt(n, decimals = 2) {
+  if (!isFinite(n) || isNaN(n)) return '—';
   return n.toFixed(decimals);
+}
+
+function liveCalculate() {
+  calculate();
+  updateMini2x2();
+  drawROC();
 }
 
 function calculate() {
@@ -1116,13 +1640,13 @@ function calculate() {
   const c = parseFloat(document.getElementById('cc').value) || 0;
   const d = parseFloat(document.getElementById('cd').value) || 0;
 
-  const ar_exp = a / (a + b);
-  const ar_ctrl = c / (c + d);
-  const rr = ar_exp / ar_ctrl;
-  const or_val = (a * d) / (b * c);
+  const ar_exp = (a + b) > 0 ? a / (a + b) : 0;
+  const ar_ctrl = (c + d) > 0 ? c / (c + d) : 0;
+  const rr = ar_ctrl > 0 ? ar_exp / ar_ctrl : NaN;
+  const or_val = (b * c) > 0 ? (a * d) / (b * c) : NaN;
   const arr = ar_ctrl - ar_exp;
-  const rrr = arr / ar_ctrl;
-  const nnt = 1 / Math.abs(arr);
+  const rrr = ar_ctrl > 0 ? arr / ar_ctrl : NaN;
+  const nnt = arr !== 0 ? 1 / Math.abs(arr) : NaN;
 
   document.getElementById('r-ar-exp').textContent = (ar_exp * 100).toFixed(1) + '%';
   document.getElementById('r-ar-ctrl').textContent = (ar_ctrl * 100).toFixed(1) + '%';
@@ -1131,25 +1655,170 @@ function calculate() {
   document.getElementById('r-arr').textContent = (arr * 100).toFixed(2) + '%';
   document.getElementById('r-rrr').textContent = (rrr * 100).toFixed(1) + '%';
   document.getElementById('r-nnt').textContent = fmt(nnt, 1);
-  document.getElementById('results').style.display = 'grid';
 
-  // DX stats (treating exposed = test positive, disease = disease+)
-  const sens = a / (a + c);
-  const spec = d / (b + d);
-  const ppv = a / (a + b);
-  const npv = d / (c + d);
-  const lrp = sens / (1 - spec);
-  const lrn = (1 - sens) / spec;
+  const sens = (a + c) > 0 ? a / (a + c) : 0;
+  const spec = (b + d) > 0 ? d / (b + d) : 1;
+  const ppv  = (a + b) > 0 ? a / (a + b) : 0;
+  const npv  = (c + d) > 0 ? d / (c + d) : 0;
+  const lrp  = (1 - spec) > 0 ? sens / (1 - spec) : NaN;
+  const lrn  = spec > 0 ? (1 - sens) / spec : NaN;
 
   document.getElementById('r-sens').textContent = (sens * 100).toFixed(1) + '%';
   document.getElementById('r-spec').textContent = (spec * 100).toFixed(1) + '%';
-  document.getElementById('r-ppv').textContent = (ppv * 100).toFixed(1) + '%';
-  document.getElementById('r-npv').textContent = (npv * 100).toFixed(1) + '%';
-  document.getElementById('r-lrp').textContent = fmt(lrp);
-  document.getElementById('r-lrn').textContent = fmt(lrn);
-  document.getElementById('dx-results').style.display = 'grid';
+  document.getElementById('r-ppv').textContent  = (ppv  * 100).toFixed(1) + '%';
+  document.getElementById('r-npv').textContent  = (npv  * 100).toFixed(1) + '%';
+  document.getElementById('r-lrp').textContent  = fmt(lrp);
+  document.getElementById('r-lrn').textContent  = fmt(lrn);
 }
 
+function updateMini2x2() {
+  const a = parseFloat(document.getElementById('ca').value) || 0;
+  const b = parseFloat(document.getElementById('cb').value) || 0;
+  const c = parseFloat(document.getElementById('cc').value) || 0;
+  const d = parseFloat(document.getElementById('cd').value) || 0;
+  document.getElementById('m2-a').textContent = a;
+  document.getElementById('m2-b').textContent = b;
+  document.getElementById('m2-c').textContent = c;
+  document.getElementById('m2-d').textContent = d;
+  document.getElementById('m2-ab').textContent = a + b;
+  document.getElementById('m2-cd').textContent = c + d;
+  document.getElementById('m2-ac').textContent = a + c;
+  document.getElementById('m2-bd').textContent = b + d;
+  document.getElementById('m2-n').textContent  = a + b + c + d;
+}
+
+// ─── ROC CURVE ─────────────────────────────────────────────────────────────
+function drawROC() {
+  const canvas = document.getElementById('roc-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = 320, H = 280;
+  const ml = 44, mt = 18, mr = 14, mb = 38;
+  const pw = W - ml - mr, ph = H - mt - mb;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const a = parseFloat(document.getElementById('ca').value) || 0;
+  const b = parseFloat(document.getElementById('cb').value) || 0;
+  const c = parseFloat(document.getElementById('cc').value) || 0;
+  const d = parseFloat(document.getElementById('cd').value) || 0;
+
+  const sens = (a + c) > 0 ? a / (a + c) : 0;
+  const spec = (b + d) > 0 ? d / (b + d) : 1;
+  const fpr  = 1 - spec;
+  const tpr  = sens;
+
+  // Background
+  ctx.fillStyle = '#0a0c0f';
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#111418';
+  ctx.fillRect(ml, mt, pw, ph);
+
+  // Grid
+  ctx.strokeStyle = '#1e2530';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const gx = ml + (i / 4) * pw;
+    const gy = mt + (i / 4) * ph;
+    ctx.beginPath(); ctx.moveTo(gx, mt); ctx.lineTo(gx, mt + ph); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ml, gy); ctx.lineTo(ml + pw, gy); ctx.stroke();
+  }
+
+  // AUC fill
+  if (fpr > 0 && fpr < 1 && tpr > 0 && tpr < 1) {
+    const beta = Math.log(1 - tpr) / Math.log(1 - fpr);
+    ctx.beginPath();
+    ctx.moveTo(ml, mt + ph);
+    for (let xi = 0; xi <= 100; xi++) {
+      const x = xi / 100;
+      const y = 1 - Math.pow(1 - x, beta);
+      ctx.lineTo(ml + x * pw, mt + (1 - y) * ph);
+    }
+    ctx.lineTo(ml + pw, mt + ph);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(0,212,170,0.07)';
+    ctx.fill();
+  }
+
+  // Random diagonal
+  ctx.beginPath();
+  ctx.moveTo(ml, mt + ph);
+  ctx.lineTo(ml + pw, mt);
+  ctx.strokeStyle = '#6b7a8d';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ROC curve
+  if (fpr > 0 && fpr < 1 && tpr > 0 && tpr < 1) {
+    const beta = Math.log(1 - tpr) / Math.log(1 - fpr);
+    ctx.beginPath();
+    for (let xi = 0; xi <= 100; xi++) {
+      const x = xi / 100;
+      const y = 1 - Math.pow(1 - x, beta);
+      const cx_ = ml + x * pw;
+      const cy_ = mt + (1 - y) * ph;
+      xi === 0 ? ctx.moveTo(cx_, cy_) : ctx.lineTo(cx_, cy_);
+    }
+    ctx.strokeStyle = '#00d4aa';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // AUC label
+    const auc = beta / (beta + 1);
+    ctx.fillStyle = '#00d4aa';
+    ctx.font = 'bold 11px JetBrains Mono, monospace';
+    ctx.fillText('AUC ≈ ' + auc.toFixed(2), ml + 6, mt + 18);
+  }
+
+  // Axes
+  ctx.strokeStyle = '#4f9cf9';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(ml, mt); ctx.lineTo(ml, mt + ph); ctx.lineTo(ml + pw, mt + ph);
+  ctx.stroke();
+
+  // Tick labels
+  ctx.fillStyle = '#6b7a8d';
+  ctx.font = '9px JetBrains Mono, monospace';
+  for (let i = 0; i <= 4; i++) {
+    const gx = ml + (i / 4) * pw;
+    const gy = mt + (1 - i / 4) * ph;
+    ctx.fillText((i / 4).toFixed(1), gx - 6, mt + ph + 13);
+    ctx.fillText((i / 4).toFixed(1), 2, gy + 4);
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#6b7a8d';
+  ctx.font = '10px JetBrains Mono, monospace';
+  ctx.fillText('1−Spec (FPR) →', ml + pw / 2 - 42, H - 4);
+  ctx.save();
+  ctx.translate(11, mt + ph / 2 + 28);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('← Sens (TPR)', 0, 0);
+  ctx.restore();
+
+  // Operating point dot
+  const opx = ml + fpr * pw;
+  const opy = mt + (1 - tpr) * ph;
+  ctx.beginPath();
+  ctx.arc(opx, opy, 7, 0, Math.PI * 2);
+  ctx.fillStyle = '#00d4aa';
+  ctx.fill();
+  ctx.strokeStyle = '#0a0c0f';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Point label
+  ctx.fillStyle = '#e8edf3';
+  ctx.font = '9px JetBrains Mono, monospace';
+  const lx = opx + 10, ly = opy - 8;
+  ctx.fillText('(' + fpr.toFixed(2) + ', ' + tpr.toFixed(2) + ')', lx, ly);
+}
+
+// ─── DRILL ─────────────────────────────────────────────────────────────────
+const TOTAL_QUESTIONS = 10;
 let scores = { correct: 0, wrong: 0, answered: 0 };
 let answered = {};
 
@@ -1167,8 +1836,7 @@ function answer(qnum, chosen, correct) {
     if (letter === chosen && chosen === correct) btn.classList.add('correct');
   });
 
-  const exp = document.getElementById('exp' + qnum);
-  exp.classList.add('visible');
+  document.getElementById('exp' + qnum).classList.add('visible');
 
   const isCorrect = chosen === correct;
   if (isCorrect) scores.correct++; else scores.wrong++;
@@ -1176,16 +1844,242 @@ function answer(qnum, chosen, correct) {
 
   document.getElementById('score-correct').textContent = scores.correct;
   document.getElementById('score-wrong').textContent = scores.wrong;
-  document.getElementById('score-total').textContent = scores.answered + '/6';
+  document.getElementById('score-total').textContent = scores.answered + '/' + TOTAL_QUESTIONS;
 
-  const dots = document.querySelectorAll('.dot');
+  const dots = document.querySelectorAll('#progress-dots .dot');
   if (dots[qnum - 1]) {
     dots[qnum - 1].classList.add(isCorrect ? 'done-correct' : 'done-wrong');
   }
 }
 
-// init calculator
-calculate();
+function resetDrill() {
+  scores = { correct: 0, wrong: 0, answered: 0 };
+  answered = {};
+  document.getElementById('score-correct').textContent = '0';
+  document.getElementById('score-wrong').textContent = '0';
+  document.getElementById('score-total').textContent = '0/' + TOTAL_QUESTIONS;
+  document.querySelectorAll('#progress-dots .dot').forEach(d => {
+    d.classList.remove('done-correct', 'done-wrong');
+  });
+  for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+    const card = document.getElementById('q' + i);
+    if (!card) continue;
+    card.querySelectorAll('.choice-btn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong', 'show-correct');
+    });
+    const exp = document.getElementById('exp' + i);
+    if (exp) exp.classList.remove('visible');
+  }
+}
+
+// ─── FLASH CARDS ───────────────────────────────────────────────────────────
+const FC_DATA = [
+  {
+    emoji: '🎯', name: 'AR — Absolute Risk',
+    formula: 'a / (a+b)',
+    meaning: 'Fraction of exposed people who got sick. Also called incidence or attack rate.',
+    killer: '⚠ Case-control → cannot calculate AR. No true incidence data.',
+    mnemonic: '🎯 Bullseye = direct hit rate in exposed group'
+  },
+  {
+    emoji: '⚖️', name: 'RR — Relative Risk',
+    formula: '[a/(a+b)] ÷ [c/(c+d)]',
+    meaning: 'How much more likely is disease in exposed vs unexposed? RR<1 = protective, RR>1 = harmful, RR=1 = no difference.',
+    killer: '⚠ Cohort/RCT only. CI crosses 1 → not significant.',
+    mnemonic: '⚖️ Balance = comparing two groups'
+  },
+  {
+    emoji: '🎲', name: 'OR — Odds Ratio',
+    formula: '(a × d) / (b × c)',
+    meaning: '"Diagonal cross-multiply." Use for case-control studies. When rare disease (<10%), OR ≈ RR.',
+    killer: '⚠ Case-control → OR is your ONLY option. OR always farther from 1 than RR.',
+    mnemonic: '🎲 Gambling = calculating odds'
+  },
+  {
+    emoji: '🛡️', name: 'ARR — Absolute Risk Reduction',
+    formula: 'AR(control) − AR(treated)',
+    meaning: 'How much did treatment actually reduce risk? Control minus treated. Most clinically meaningful number.',
+    killer: '⚠ Boards: "best reflects clinical benefit" → ARR or NNT, NOT RRR.',
+    mnemonic: '🛡️ Shield = actual protection you get'
+  },
+  {
+    emoji: '📢', name: 'RRR — Relative Risk Reduction',
+    formula: 'ARR / AR(control)',
+    meaning: 'Proportional reduction in risk. What pharmaceutical ads quote to make drugs look impressive.',
+    killer: '⚠ Low baseline risk = huge RRR with tiny ARR. See through the ad.',
+    mnemonic: '📢 Megaphone = pharma shouting inflated numbers'
+  },
+  {
+    emoji: '💊', name: 'NNT — Number Needed to Treat',
+    formula: '1 / ARR',
+    meaning: 'How many patients need treatment to prevent 1 bad outcome? Lower = better. ALWAYS round UP.',
+    killer: '⚠ NNT=1 = perfect. NNT=1000 = barely helpful. Always round up to next whole number.',
+    mnemonic: '💊 Pill count = how many you have to give'
+  },
+  {
+    emoji: '☠️', name: 'NNH — Number Needed to Harm',
+    formula: '1 / ARI (absolute risk increase)',
+    meaning: 'How many patients exposed until 1 is harmed. Higher = safer drug.',
+    killer: '⚠ ARI = control risk MINUS treatment (when treatment increases risk). NNH > NNT = acceptable tradeoff.',
+    mnemonic: '☠️ Skull = side effect toll'
+  },
+  {
+    emoji: '🔍', name: 'Sensitivity — SnNout',
+    formula: 'a / (a + c)  =  TP / all sick',
+    meaning: 'How good at finding true disease? High sensitivity → good screening test. NEGATIVE result rules OUT.',
+    killer: '⚠ SnNout: High SeNsitivity → Negative rules out. Does NOT change with prevalence.',
+    mnemonic: '🔍 Magnifying glass = searching hard to find all disease'
+  },
+  {
+    emoji: '🔒', name: 'Specificity — SpPin',
+    formula: 'd / (b + d)  =  TN / all healthy',
+    meaning: 'How good at correctly labeling healthy people? High specificity → good confirmatory test. POSITIVE result rules IN.',
+    killer: '⚠ SpPin: High SPecificity → Positive rules in. Does NOT change with prevalence.',
+    mnemonic: '🔒 Lock = locking in the diagnosis with a positive'
+  },
+  {
+    emoji: '✅', name: 'PPV — Positive Predictive Value',
+    formula: 'a / (a + b)',
+    meaning: 'If test is positive, what\'s the chance the patient actually has disease?',
+    killer: '⚠ Low prevalence → terrible PPV even with 99% sens/spec. Most positives = false positives.',
+    mnemonic: '✅ Checkmark = but is it real? Depends on prevalence.'
+  },
+  {
+    emoji: '❌', name: 'NPV — Negative Predictive Value',
+    formula: 'd / (c + d)',
+    meaning: 'If test is negative, what\'s the chance the patient truly doesn\'t have disease?',
+    killer: '⚠ High prevalence → lower NPV. More disease in population = more false negatives.',
+    mnemonic: '❌ X mark = but could still be sick if prevalence is high'
+  },
+  {
+    emoji: '📈', name: 'LR+ — Likelihood Ratio Positive',
+    formula: 'Sensitivity / (1 − Specificity)',
+    meaning: 'How much does a POSITIVE result shift probability toward disease? >10 = strong rule-in.',
+    killer: '⚠ LR+ >10 = strong. LR 2–5 = modest. PREVALENCE-INDEPENDENT (unlike PPV/NPV).',
+    mnemonic: '📈 Rising chart = positive test pushes probability UP'
+  },
+  {
+    emoji: '📉', name: 'LR− — Likelihood Ratio Negative',
+    formula: '(1 − Sensitivity) / Specificity',
+    meaning: 'How much does a NEGATIVE result shift probability away from disease? <0.1 = strong rule-out.',
+    killer: '⚠ LR− <0.1 = strong rule-out. PREVALENCE-INDEPENDENT. Post-test odds = pre-test odds × LR.',
+    mnemonic: '📉 Falling chart = negative test pushes probability DOWN'
+  }
+];
+
+let fcQueue = [];
+let fcCurrentIdx = 0;
+let fcLearned = new Set();
+let fcIsFlipped = false;
+
+function initFlashCards() {
+  fcQueue = FC_DATA.map((_, i) => i);
+  fcCurrentIdx = 0;
+  fcLearned.clear();
+  fcIsFlipped = false;
+  buildFCDots();
+  renderFCCard();
+  document.getElementById('fc-done').style.display = 'none';
+  document.getElementById('fc-card-area').style.display = 'block';
+}
+
+function shuffleCards() {
+  for (let i = fcQueue.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [fcQueue[i], fcQueue[j]] = [fcQueue[j], fcQueue[i]];
+  }
+  fcCurrentIdx = 0;
+  renderFCCard();
+}
+
+function buildFCDots() {
+  const container = document.getElementById('fc-dots');
+  container.innerHTML = '';
+  FC_DATA.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'fc-dot';
+    dot.id = 'fc-dot-' + i;
+    container.appendChild(dot);
+  });
+}
+
+function updateFCDots() {
+  FC_DATA.forEach((_, i) => {
+    const dot = document.getElementById('fc-dot-' + i);
+    if (!dot) return;
+    dot.className = 'fc-dot';
+    if (fcLearned.has(i)) dot.classList.add('learned');
+    else if (fcQueue.includes(i)) dot.classList.add('queued');
+  });
+  const learned = fcLearned.size;
+  document.getElementById('fc-progress-text').textContent = learned + ' / ' + FC_DATA.length + ' learned';
+}
+
+function renderFCCard() {
+  if (fcQueue.length === 0) {
+    document.getElementById('fc-done').style.display = 'block';
+    document.getElementById('fc-card-area').style.display = 'none';
+    return;
+  }
+  const idx = fcQueue[fcCurrentIdx % fcQueue.length];
+  const card = FC_DATA[idx];
+  document.getElementById('fc-emoji').textContent = card.emoji;
+  document.getElementById('fc-name').textContent = card.name;
+  document.getElementById('fc-formula').textContent = card.formula;
+  document.getElementById('fc-meaning').textContent = card.meaning;
+  document.getElementById('fc-killer').textContent = card.killer;
+  document.getElementById('fc-mnemonic').textContent = card.mnemonic;
+  document.getElementById('fc-card').classList.remove('flipped');
+  fcIsFlipped = false;
+  updateFCDots();
+}
+
+function flipCard() {
+  fcIsFlipped = !fcIsFlipped;
+  document.getElementById('fc-card').classList.toggle('flipped', fcIsFlipped);
+}
+
+function fcGotIt() {
+  const idx = fcQueue[fcCurrentIdx % fcQueue.length];
+  fcLearned.add(idx);
+  fcQueue.splice(fcCurrentIdx % fcQueue.length, 1);
+  if (fcQueue.length === 0) {
+    document.getElementById('fc-done').style.display = 'block';
+    document.getElementById('fc-card-area').style.display = 'none';
+    updateFCDots();
+    return;
+  }
+  fcCurrentIdx = fcCurrentIdx % fcQueue.length;
+  renderFCCard();
+}
+
+function fcAgain() {
+  const pos = fcCurrentIdx % fcQueue.length;
+  const idx = fcQueue[pos];
+  fcQueue.splice(pos, 1);
+  const insertAt = Math.min(fcQueue.length, pos + 3);
+  fcQueue.splice(insertAt, 0, idx);
+  fcCurrentIdx = pos % fcQueue.length;
+  renderFCCard();
+}
+
+function restartFlashCards() {
+  initFlashCards();
+}
+
+// ─── KEYBOARD HANDLER ──────────────────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('s7').classList.contains('active')) return;
+  if (e.code === 'Space') { e.preventDefault(); flipCard(); }
+  if (e.code === 'ArrowRight' && fcIsFlipped) { e.preventDefault(); fcGotIt(); }
+  if (e.code === 'ArrowLeft' && fcIsFlipped) { e.preventDefault(); fcAgain(); }
+});
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+initSliderTracks();
+liveCalculate();
+initFlashCards();
 </script>
 </body>
 </html>
